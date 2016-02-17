@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+        <title></title>
+    </head>
+    <body>
+        <div class="container">
+            <h1></h1>
+            <form action="/rock_paper_scissors">
+                <div class="form-group">
+                    <label for="input_1">Player 1</label>
+                        <select name= "input_1" id="input_1" class="form-control">
+                            <option>rock</option>
+                            <option>paper</option>
+                            <option>scissors</option>
+                        </select><br>
+                    <label for="input_2">Player 2</label>
+                        <select name= "input_2" id="input_2" class="form-control">
+                            <option>rock</option>
+                            <option>paper</option>
+                            <option>scissors</option>
+                        </select><br>
+                </div>
+                <button class="btn btn-success" type="submit">Play!</button>
+            </form>
+            <hr>
+            <br>
+            <div class="well">
+                <h3>Who won?</h3>
+                <p>
+                    {{ results }}
+                </p>
+
+            </div>
+        </div>
+    </body>
+</html>
