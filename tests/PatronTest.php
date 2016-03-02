@@ -19,8 +19,7 @@
         {
             Patron::deleteAll();
             Copy::deleteAll();
-            // Copy::deleteAll();
-            // Patron::deleteAll();
+            Book::deleteAll();
         }
 
         function test_save()
@@ -105,18 +104,25 @@
             //Arrange
 
             $name = "J.K.";
-            $email_address = "Rowling";
+            $email_address = "Rowling@rowling.com";
             $test_patron = new Patron($name, $email_address);
             $test_patron->save();
 
-            $book_id = 1;
+            $title = "Harry Potters Last Stand";
+            // $id = 1;
+            $test_book = new Book($title);
+            $test_book->save();
+
+            $book_id = $test_book->getId();
             $checked_out = 1;
-            $test_copy = new Copy($book_id, $checked_out);
+            $due_date = '2016-03-28';
+            $test_copy = new Copy($book_id, $checked_out, $due_date);
             $test_copy->save();
 
-            $book_id2 = 1;
+            $book_id2 = $test_book->getId();
             $checked_out2 = 0;
-            $test_copy2 = new Copy($book_id2, $checked_out2);
+            $due_date2 = '2016-03-28';
+            $test_copy2 = new Copy($book_id2, $checked_out2, $due_date2);
             $test_copy2->save();
 
             //Act
@@ -132,20 +138,26 @@
         {
             //Arrange
             $name = "J.K.";
-            $email_address = "Rowling";
+            $email_address = "Rowling@rowling.com";
             $test_patron = new Patron($name, $email_address);
             $test_patron->save();
 
-            $book_id = 1;
+            $title = "Harry Potters Last Stand";
+            $id = 1;
+            $test_book = new Book($title, $id);
+            $test_book->save();
+
+            $book_id = $test_book->getId();
             $checked_out = 1;
-            $test_copy = new Copy($book_id, $checked_out);
+            $due_date = '2016-03-28';
+            $test_copy = new Copy($book_id, $checked_out, $due_date);
             $test_copy->save();
 
             //Act
             $test_patron->addCopies($test_copy->getId());
 
             //Assert
-            $this->assertEquals($test_patron->getCopies(), [$test_copy]);
+            $this->assertEquals([$test_copy], $test_patron->getCopies());
         }
 
     }

@@ -82,23 +82,25 @@
             $query = $GLOBALS['DB']->query(
                 "SELECT copies.*
                 FROM patrons
-                JOIN checkouts ON (patrons.id = checkouts.patron_id)
+                JOIN checkouts ON (patrons.id = checkouts.patrons_id)
                 JOIN copies ON (checkouts.copies_id = copies.id)
                 WHERE patrons.id = {$this->getId()};"
             );
 
             $copies = array();
             foreach($query as $copy){
-                $title = $copy['title'];
+                $book_id = $copy['book_id'];
+                $checked_out = $copy['checked_out'];
+                $due_date = $copy['due_date'];
                 $id = $copy['id'];
-                $new_copy = new Copy($title, $id);
+                $new_copy = new Copy($book_id, $checked_out, $due_date, $id);
 
                 array_push($copies, $new_copy);
             }
             return $copies;
         }
 
-        function addCopies($copy_id)
+        function addCopies($copies_id)
         {
             $GLOBALS['DB']->exec("INSERT INTO checkouts (patrons_id, copies_id) VALUES ({$this->getId()}, {$copies_id});");
         }
