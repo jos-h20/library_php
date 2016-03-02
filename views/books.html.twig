@@ -1,0 +1,35 @@
+
+<html>
+    <head>
+        <title>University Registrar</title>
+    </head>
+    <body>
+        <h1>Books</h1>
+<!-- DISPLAY AREA -->
+        {% if books is not empty %}
+            <h3>List of current books:</h3>
+            <ul>
+                {% for book in books %}
+                    <li><a href="/book/{{ book.getId }}">{{ book.getTitle }}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <h3>You currently don't have any books listed! Use the form below to add a book.</h3>
+        {% endif %}
+<!-- END DISPLAY AREA -->
+<!-- START ADD STUDENT FORM -->
+        <form action="/add_book" method="post">
+            <label for="title">Book Title:</label>
+            <input type="text" name="title" required>
+
+            <button type="submit">Add Book</button>
+        </form>
+<!-- END ADD STUDENT FORM -->
+        <form action="/delete_all_books" method="post">
+            <button type="submit">Delete ALL Books</button>
+        </form>
+<!-- NAVIGATION -->
+        {% include 'footer.html' %}
+
+    </body>
+</html>
