@@ -65,28 +65,42 @@
         }
 
         static function findAuthor($search_id)
-            {
-                $found_author = null;
-                $authors = Author::getAll();
-                foreach($authors as $author) {
-                    $author_id = $author->getId();
-                    if ($author_id == $search_id) {
-                      $found_author = $author;
-                    }
+        {
+            $found_author = null;
+            $authors = Author::getAll();
+            foreach($authors as $author) {
+                $author_id = $author->getId();
+                if ($author_id == $search_id) {
+                  $found_author = $author;
                 }
-                return $found_author;
             }
-
-        function getBooks()
-        {
-
+            return $found_author;
         }
 
-        function addBook()
-        {
-
-        }
+        // function getBooks()
+        // {
+        //     $query = $GLOBALS['DB']->query(
+        //         "SELECT books.*
+        //         FROM authors
+        //         JOIN books_authors ON (authors.id = authors_books.author_id)
+        //         JOIN books ON (authors_books.book_id = books.id)
+        //         WHERE authors.id = {$this->getId()};"
+        //     );
+        //
+        //     $books = [];
+        //     foreach($query as $book){
+        //         $title = $book['title'];
+        //         $id = $book['id'];
+        //         $new_book = new Book($title);
+        //
+        //         $books[] = $new_book;
+        //     }
+        //     return $books;
+        // }
+        //
+        // function addBook($book_id)
+        // {
+        //     $GLOBALS['DB']->exec("INSERT INTO books_authors (author_id, book_id) VALUES ({$this->getId()}, {$book_id});");
+        // }
     }
-
-
 ?>
