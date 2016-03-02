@@ -97,6 +97,22 @@
             $this->assertEquals($test_book, $result);
         }
 
+        function test_findBookTitle()
+        {
+            //Arrange
+            $title = "Harry Potters Last Stand";
+            $test_book = new Book($title);
+            $test_book->save();
+
+            $title2 = "The Alchemists Revenge";
+            $test_book2 = new Book($title2);
+            $test_book2->save();
+            //Act
+            $result = Book::findBookTitle($test_book->getTitle());
+            //Assert
+            $this->assertEquals($test_book, $result);
+        }
+
         function test_getAuthors()
         {
             //Arrange

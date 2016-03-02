@@ -60,6 +60,19 @@
             }
             return $found_book;
         }
+        static function findBookTitle($search_title)
+        {
+            $found_book = null;
+            $books = Book::getAll();
+            foreach($books as $book) {
+                $book_title = $book->getTitle();
+                if ($book_title == $search_title) {
+                  $found_book = $book;
+                }
+            }
+            return $found_book;
+        }
+
         function getAuthors()
         {
             $query = $GLOBALS['DB']->query(
