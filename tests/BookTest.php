@@ -142,5 +142,33 @@
             //Assert
             $this->assertEquals($test_book->getAuthors(), [$test_author]);
         }
+        function testDelete() {
+            //Arrange;
+            $title = "Harry Potters Last Stand";
+            $test_book = new Book($title);
+            $test_book->save();
+
+            $title2 = "The Alchemists Revenge";
+            $test_book2 = new Book($title2);
+            $test_book2->save();
+            //Act;
+            $test_book2->delete();
+            //Assert;
+            $this->assertEquals([$test_book], Book::getAll());
+        }
+        function testUpdate()
+        {
+            // Arrange
+            $title = "Harry Potters Last Stand";
+            $test_book = new Book($title);
+            $test_book->save();
+
+            $new_title = "Intro to Coding";
+            // Act
+            $test_book->update($new_title);
+            $result = [$test_book->getTitle()];
+            // Assert
+            $this->assertEquals(["Intro to Coding"], $result);
+        }
     }
 ?>
