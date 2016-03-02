@@ -126,15 +126,15 @@
             $test_copy2->save();
 
             //Act
-            $test_patron->addCopies($test_copy->getId());
-            $test_patron->addCopies($test_copy2->getId());
+            $test_patron->addPatronCopies($test_copy->getId());
+            $test_patron->addPatronCopies($test_copy2->getId());
             $result = $test_patron->getCopies();
 
             //Assert
             $this->assertEquals([$test_copy, $test_copy2], $result);
         }
 
-        function test_addCopies()
+        function test_addPatronCopies()
         {
             //Arrange
             $name = "J.K.";
@@ -154,7 +154,7 @@
             $test_copy->save();
 
             //Act
-            $test_patron->addCopies($test_copy->getId());
+            $test_patron->addPatronCopies($test_copy->getId());
 
             //Assert
             $this->assertEquals([$test_copy], $test_patron->getCopies());

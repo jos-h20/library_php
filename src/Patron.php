@@ -100,7 +100,7 @@
             return $copies;
         }
 
-        function addCopies($copies_id)
+        function addPatronCopies($copies_id)
         {
             $GLOBALS['DB']->exec("INSERT INTO checkouts (patrons_id, copies_id) VALUES ({$this->getId()}, {$copies_id});");
         }
