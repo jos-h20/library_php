@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>{{ book.getTitle}}</title>
+    </head>
+    <body>
+        <h1> {{ book.getTitle}}</h1>
+        <h3> {{ book.getAuthors }}</h3>
+        {% if authors is not empty %}
+        <h4>Here are your authors:</h4>
+            <ul>
+                {% for author in authors %}
+                    <li><a href="/author/{{ author.getId }}">{{ author.getName }}</a></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+<!-- ADD TASK TO CATEGORY DROPDOWN -->
+        <form action="/book_add_author" method="post">
+            <input id="book_id" = name="book_id" type="hidden" value="{{ book.getId }}">
+                <label for="author_id">Add this book to a author:</label>
+                <select name="author_id" type="text" required>
+                        {% for author in all_authors %}
+                            <option value="{{ author.getId }}">{{ author.getTitle }}</option>
+                        {% endfor %}
+                </select>
+            <button type="submit">Add Author</button>
+        </form>
+<!-- EDIT TASK FORM -->
+        <h5>Edit your book here:</h5>
+        <form action="/book/{{ book.getId }}/update" method="post">
+            <input type="hidden" name="_method" value="patch">
+
+            <label for='new_title'>New Book Title:</label>
+            <input id='new_title' name='new_title' type='text' value="{{ book.getTitle}}" required>
+
+
+            <button type='submit'>Update Student</button>
+        </form>
+<!-- DELETE TASK BUTTON -->
+        <form action="/book/{{ book.getId }}/delete" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <button type="submit">Delete this book!</button>
+        </form>
+<!-- NAVIGATION -->
+        {% include 'footer.html' %}
+
+    </body>
+</html>
