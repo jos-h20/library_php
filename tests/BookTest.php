@@ -5,7 +5,7 @@
     */
 
     require_once "src/Book.php";
-    // require_once "src/Book.php";
+    require_once "src/Author.php";
     // require_once "src/Copy.php";
     // require_once "src/Patron.php";
 
@@ -19,7 +19,7 @@
         protected function tearDown()
         {
             Book::deleteAll();
-            // Book::deleteAll();
+            Author::deleteAll();
             // Copy::deleteAll();
             // Patron::deleteAll();
         }

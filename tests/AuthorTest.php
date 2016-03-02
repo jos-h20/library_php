@@ -4,7 +4,7 @@
     * @backupStaticAttributes disabled
     */
     require_once "src/Author.php";
-    // require_once "src/Book.php";
+    require_once "src/Book.php";
     // require_once "src/Copy.php";
     // require_once "src/Patron.php";
 
@@ -18,7 +18,7 @@
         protected function tearDown()
         {
             Author::deleteAll();
-            // Book::deleteAll();
+            Book::deleteAll();
             // Copy::deleteAll();
             // Patron::deleteAll();
         }
@@ -100,50 +100,50 @@
             $this->assertEquals($test_author, $result);
         }
 
-        // function test_getBooks()
-        // {
-        //     //Arrange
-        //
-        //     $first_name = "J.K.";
-        //     $last_name = "Rowling";
-        //     $test_author = new Author($first_name, $last_name);
-        //     $test_author->save();
-        //
-        //     $title = "Harry Potter and the Prisoner of Azkaban";
-        //     $test_book = new Book($title);
-        //     $test_book->save();
-        //
-        //     $title = "Harry Potter and the Order of the Phoenix";
-        //     $test_book2 = new Book($title);
-        //     $test_book2->save();
-        //
-        //     //Act
-        //     $test_course->addStudent($test_book->getId());
-        //     $test_course->addStudent($test_book2->getId());
-        //     $result = $test_author->getBooks();
-        //
-        //     //Assert
-        //     $this->assertEquals([$test_book, $test_book2], $result);
-        // }
-        //
-        // function test_addBook()
-        // {
-        //     //Arrange
-        //     $first_name = "J.K.";
-        //     $last_name = "Rowling";
-        //     $test_author = new Author($first_name, $last_name);
-        //     $test_author->save();
-        //
-        //     $title = "Harry Potter and the Prisoner of Azkaban";
-        //     $test_book = new Book($title);
-        //     $test_book->save();
-        //
-        //     //Act
-        //     $test_author->addBook($test_book->getId());
-        //
-        //     //Assert
-        //     $this->assertEquals($test_author->getBooks(), [$test_book]);
-        // }
+        function test_getBooks()
+        {
+            //Arrange
+
+            $first_name = "J.K.";
+            $last_name = "Rowling";
+            $test_author = new Author($first_name, $last_name);
+            $test_author->save();
+
+            $title = "Harry Potter and the Prisoner of Azkaban";
+            $test_book = new Book($title);
+            $test_book->save();
+
+            $title = "Harry Potter and the Order of the Phoenix";
+            $test_book2 = new Book($title);
+            $test_book2->save();
+
+            //Act
+            $test_author->addBook($test_book->getId());
+            $test_author->addBook($test_book2->getId());
+            $result = $test_author->getBooks();
+
+            //Assert
+            $this->assertEquals([$test_book, $test_book2], $result);
+        }
+
+        function test_addBook()
+        {
+            //Arrange
+            $first_name = "J.K.";
+            $last_name = "Rowling";
+            $test_author = new Author($first_name, $last_name);
+            $test_author->save();
+
+            $title = "Harry Potter and the Prisoner of Azkaban";
+            $test_book = new Book($title);
+            $test_book->save();
+
+            //Act
+            $test_author->addBook($test_book->getId());
+
+            //Assert
+            $this->assertEquals($test_author->getBooks(), [$test_book]);
+        }
 
     }
 
