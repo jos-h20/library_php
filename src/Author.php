@@ -76,7 +76,20 @@
             }
             return $found_author;
         }
-
+        // static function returnBooksByAuthor($search_name)
+        // {
+        //     $found_author = null;
+        //     $authors = Author::getAll();
+        //     foreach($authors as $author) {
+        //         $author_name = $author->getLastName();
+        //         if ($author_name == $search_name) {
+        //           $found_author = $author;
+        //           $returned_books = $found_author->getBooks();
+        //         }
+        //         var_dump($returned_books);
+        //     }
+        //     return $returned_books;
+        // }
         function getBooks()
         {
             $query = $GLOBALS['DB']->query(

@@ -100,6 +100,33 @@
             $this->assertEquals($test_author, $result);
         }
 
+        // function test_returnBooksByAuthor()
+        // {
+        //     //Arrange
+        //     $first_name = "J.K.";
+        //     $last_name = "Rowling";
+        //     $test_author = new Author($first_name, $last_name);
+        //     $test_author->save();
+        //
+        //     $first_name2 = "Paolo";
+        //     $last_name2 = "Coehlo";
+        //     $test_author2 = new Author($first_name2, $last_name2);
+        //     $test_author2->save();
+        //
+        //     $title = "Harry Potters Last Stand";
+        //     $test_book = new Book($title);
+        //     $test_book->save();
+        //
+        //     $title2 = "The Alchemists Revenge";
+        //     $test_book2 = new Book($title2);
+        //     $test_book2->save();
+        //     //Act
+        //     $result = Author::returnBooksByAuthor($test_author->getLastName());
+        //
+        //     //Assert
+        //     $this->assertEquals([$test_book], $result);
+        // }
+
         function test_getBooks()
         {
             //Arrange
