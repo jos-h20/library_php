@@ -21,7 +21,7 @@
             Book::deleteAll();
             // Author::deleteAll();
             Copy::deleteAll();
-            // Patron::deleteAll();
+            Patron::deleteAll();
         }
 
         function test_save()
@@ -33,7 +33,8 @@
 
             $book_id = $test_book->getId();
             $checked_out = 1;
-            $test_copy = new Copy($book_id, $checked_out);
+            $due_date = '2016-03-28';
+            $test_copy = new Copy($book_id, $checked_out, $due_date);
             $test_copy->save();
 
             //Act
@@ -54,12 +55,14 @@
 
             $book_id = $test_book->getId();
             $checked_out = 1;
-            $test_copy = new Copy($book_id, $checked_out);
+            $due_date = '2016-03-28';
+            $test_copy = new Copy($book_id, $checked_out, $due_date);
             $test_copy->save();
 
             $book_id2 = $test_book->getId();
             $checked_out2 = 0;
-            $test_copy2 = new Copy($book_id2, $checked_out2);
+            $due_date2 = '2016-03-28';
+            $test_copy2 = new Copy($book_id2, $checked_out2, $due_date2);
             $test_copy2->save();
 
             //Act
@@ -78,12 +81,14 @@
 
             $book_id = $test_book->getId();
             $checked_out = 1;
-            $test_copy = new Copy($book_id, $checked_out);
+            $due_date = '2016-03-28';
+            $test_copy = new Copy($book_id, $checked_out, $due_date);
             $test_copy->save();
 
             $book_id2 = $test_book->getId();
             $checked_out2 = 0;
-            $test_copy2 = new Copy($book_id2, $checked_out2);
+            $due_date2 = '2016-03-28';
+            $test_copy2 = new Copy($book_id2, $checked_out2, $due_date2);
             $test_copy2->save();
 
 
