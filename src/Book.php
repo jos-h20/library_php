@@ -60,6 +60,32 @@
             }
             return $found_book;
         }
+        function getAuthors()
+        {
+            $query = $GLOBALS['DB']->query(
+                "SELECT authors.*
+                FROM books
+                JOIN books_authors ON (books.id = books_authors.book_id)
+                JOIN authors ON (books_authors.author_id = authors.id)
+                WHERE books.id = {$this->getId()};"
+            );
+
+            $authors = array();
+            foreach($query as $author){
+                $first_name = $author['first_name'];
+                $last_name = $author['last_name'];
+                $id = $author['id'];
+                $new_author = new Author($first_name, $last_name, $id);
+
+                array_push($authors, $new_author);
+            }
+            return $authors;
+        }
+
+        function addAuthor($author_id)
+        {
+            $GLOBALS['DB']->exec("INSERT INTO books_authors (book_id, author_id) VALUES ({$this->getId()}, {$author_id});");
+        }
 
     }
 

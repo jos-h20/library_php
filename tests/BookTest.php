@@ -96,5 +96,51 @@
             //Assert
             $this->assertEquals($test_book, $result);
         }
+
+        function test_getAuthors()
+        {
+            //Arrange
+
+            $first_name = "J.K.";
+            $last_name = "Rowling";
+            $test_author = new Author($first_name, $last_name);
+            $test_author->save();
+
+            $first_name2 = "Paolo";
+            $last_name2 = "Coehlo";
+            $test_author2 = new Author($first_name2, $last_name2);
+            $test_author2->save();
+
+            $title = "Harry Potter and the Prisoner of Azkaban";
+            $test_book = new Book($title);
+            $test_book->save();
+
+            //Act
+            $test_book->addAuthor($test_author->getId());
+            $test_book->addAuthor($test_author2->getId());
+            $result = $test_book->getAuthors();
+
+            //Assert
+            $this->assertEquals([$test_author, $test_author2], $result);
+        }
+
+        function test_addAuthor()
+        {
+            //Arrange
+            $first_name = "J.K.";
+            $last_name = "Rowling";
+            $test_author = new Author($first_name, $last_name);
+            $test_author->save();
+
+            $title = "Harry Potter and the Prisoner of Azkaban";
+            $test_book = new Book($title);
+            $test_book->save();
+
+            //Act
+            $test_book->addAuthor($test_author->getId());
+
+            //Assert
+            $this->assertEquals($test_book->getAuthors(), [$test_author]);
+        }
     }
 ?>
