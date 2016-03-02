@@ -80,21 +80,21 @@
             //Assert
             $this->assertEquals([], $result);
         }
-        //
-        // function test_findBook()
-        // {
-        //     //Arrange
-        //     $title = "Harry Potters Last Stand";
-        //     $test_book = new Book($title);
-        //     $test_book->save();
-        //
-        //     $title2 = "The Alchemists Revenge";
-        //     $test_book2 = new Book($title2,);
-        //     $test_book2->save();
-        //     //Act
-        //     $result = Book::findAuthor($test_book->getId());
-        //     //Assert
-        //     $this->assertEquals($test_book, $result);
-        // }
+
+        function test_findBook()
+        {
+            //Arrange
+            $title = "Harry Potters Last Stand";
+            $test_book = new Book($title);
+            $test_book->save();
+
+            $title2 = "The Alchemists Revenge";
+            $test_book2 = new Book($title2);
+            $test_book2->save();
+            //Act
+            $result = Book::findBook($test_book->getId());
+            //Assert
+            $this->assertEquals($test_book, $result);
+        }
     }
 ?>
