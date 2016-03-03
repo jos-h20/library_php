@@ -1,7 +1,7 @@
 
 <html>
     <head>
-        <title>University Registrar</title>
+        <title>Library</title>
     </head>
     <body>
         <h1>Books</h1>
@@ -11,6 +11,15 @@
             <ul>
                 {% for book in books %}
                     <li><a href="/book/{{ book.getId }}">{{ book.getTitle }}</a></li>
+                    {% if book.getAuthors is not empty%}
+                    <ul>
+                        {% for author in book.getAuthors %}
+                            <li>{{author.getFirstName}} {{author.getLastName}}</li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                        <h3>This book has no authors</h3>
+                    {% endif %}    
                 {% endfor %}
             </ul>
         {% else %}
@@ -18,10 +27,13 @@
         {% endif %}
 <!-- END DISPLAY AREA -->
 <!-- START ADD STUDENT FORM -->
-        <form action="/add_book" method="post">
+        <form action="/books/add_book" method="post">
             <label for="title">Book Title:</label>
             <input type="text" name="title" required>
-
+            <label for="first_name">Author First Name:</label>
+            <input type="text" name="first_name" required>
+            <label for="last_name">Author Last Name:</label>
+            <input type="text" name="last_name" required>
             <button type="submit">Add Book</button>
         </form>
 <!-- END ADD STUDENT FORM -->
