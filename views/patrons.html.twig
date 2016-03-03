@@ -2,12 +2,50 @@
 <html>
     <head>
         <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
-        <title></title>
+        <title>Patrons</title>
     </head>
     <body>
         <div class="container-fluid jumbotron text-center">
             <h1>The Best Library in the West</h1>
         </div>
-        
+
+        <html>
+            <head>
+                <title>University Registrar</title>
+            </head>
+            <body>
+                <h1>Patrons</h1>
+        <!-- DISPLAY AREA -->
+                {% if patrons is not empty %}
+                    <h3>List of current patrons:</h3>
+                    <ul>
+                        {% for patron in patrons %}
+                            <li><a href="/patron/{{ patron.getId }}">{{ patron.getName }}</a> {{ patron.getEmailAddress }}</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <h3>You currently don't have any patrons listed! Use the form below to add a patron.</h3>
+                {% endif %}
+        <!-- END DISPLAY AREA -->
+        <!-- START ADD STUDENT FORM -->
+                <form action="/add_patron" method="post">
+                    <label for="name">Patron Name:</label>
+                    <input type="text" name="name" required>
+
+                    <label for="email_address">Patron Email Address:</label>
+                    <input type="text" name="email_address" required>
+
+                    <button type="submit">Add Patron</button>
+                </form>
+        <!-- END ADD STUDENT FORM -->
+                <form action="/delete_all_patrons" method="post">
+                    <button type="submit">Delete ALL Patrons</button>
+                </form>
+        <!-- NAVIGATION -->
+                {% include 'footer.html' %}
+
+            </body>
+        </html>
+
     </body>
 </html>

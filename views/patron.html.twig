@@ -1,0 +1,56 @@
+
+<html>
+    <head>
+        <title>Patron</title>
+    </head>
+    <body>
+        <h1>{{ patron.getName }}</h1>
+
+        {% if copies is not empty %}
+            <p>Here are the copies:</p>
+            <ul>
+                {% for copy in copies %}
+                    <li><a href="/copies/{{ copies.getId }}">{{ copy.getName }}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>You currently don't have any copies! Use the form below to get started!</p>
+        {% endif %}
+<!-- ADD STUDENT TO COURSE DROPDOWN -->
+        <h3>Add a copy</h3>
+        <form action="/patron_add_copy" method="post">
+            <input id="patron_id" = name="patron_id" type="hidden" value="{{ patron.getId }}">
+
+            <label for="copy_id">Select a copy:</label>
+            <select name="copy_id" type="text" required>
+                    {% for copy in all_copies %}
+                        <option value="{{ copy.getId }}">{{ copy.getBookId }}</option>
+                    {% endfor %}
+            </select>
+
+            <button type="submit">Add Student</button>
+        </form>
+<!-- EDIT COURSE FORM -->
+        <h3>Edit this patron</h3>
+        <form action="/patron/{{ patron.getId }}/update" method="post">
+            <input type="hidden" name="_method" value="patch">
+
+            <label for='new_name'>New Patron Name:</label>
+            <input id='new_name' name='new_name' type='text' value="{{ patron.getName }}" required>
+
+            <label for='new_email_address'>New Email Address:</label>
+            <input id='new_email_address' name='new_email_address' type='text' value="{{ patron.getEmailAddress }}" required>
+
+            <button type="submit">Update this patron</button>
+        </form>
+<!-- DELETE CATEGORY BUTTON -->
+        <form action="/patron/{id}/delete" method="post">
+            <input type="hidden" name="_method" value="delete">
+
+            <button type="submit">Delete this patron</button>
+        </form>
+<!-- NAVIGATION -->
+        {% include 'footer.html' %}
+
+    </body>
+</html>

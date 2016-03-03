@@ -28,7 +28,7 @@
     });
 
     $app->get("/patrons", function() use ($app) {
-        return $app['twig']->render('patrons.html.twig');
+        return $app['twig']->render('patrons.html.twig', array('patrons' => Patron::getAll()));
     });
 
     //////LIBRARIAN/////////
@@ -63,6 +63,41 @@
         $book = Book::findBook($id);
         $book->delete();
         return $app['twig']->render("books.html.twig", array('books' => Book::getAll()));
+    });
+////// LIBRARIANS PATRONS PAGE///////
+    $app->post("/add_patron", function() use ($app) {
+        $name = $_POST['name'];
+        $email_address = $_POST['email_address'];
+        $id = null;
+        $new_patron = new Patron($name, $email_address, $id);
+        $new_patron->save();
+        return $app['twig']->render('patrons.html.twig', array('patrons' => Patron::getAll()));
+    });
+    $app->post("/delete_all_patrons", function() use ($app) {
+        Patron::deleteAll();
+        return $app['twig']->render('patrons.html.twig', array('patrons' => Patron::getAll()));
+    });
+    $app->get("/patron/{id}", function($id) use($app) {
+        $patron = Patron::findPatron($id);
+        return $app['twig']->render('patron.html.twig', array('patron' => $patron, 'copies' => $patron->getCopies(), 'all_copies' => Copy::getAll()));
+    });
+    $app->post("/patron_add_copy", function() use ($app) {
+        $copy = Copy::findCopy($_POST['copy_id']);
+        $patron = Patron::findPatron($_POST['patron_id']);
+        $patron->addCopy($copy);
+        return $app['twig']->render('patron.html.twig', array('patron' => $patron, 'copies' => $patron->getCopies(), 'all_copies' => Copy::getAll()));
+    });
+    $app->patch("/patron/{id}/update", function($id) use ($app) {
+        $patron = Patron::findPatron($id);
+        $new_name = $_POST['new_name'];
+        $new_email_address = $_POST['new_email_address'];
+        $patron->update($new_name, $new_email_address);
+        return $app['twig']->render('patron.html.twig', array('patron' => $patron, 'copies' => $patron->getCopies(), 'all_copies' => Copy::getAll()));
+    });
+    $app->delete("/patron/{id}/delete", function($id) use ($app) {
+        $patron = Patron::findPatron($id);
+        $patron->delete();
+        return $app['twig']->render("patrons.html.twig", array('patrons' => Patron::getAll()));
     });
 
 
