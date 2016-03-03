@@ -76,6 +76,9 @@
         {
             $GLOBALS['DB']->exec("DELETE FROM copies");
         }
+    
+
+
 
     }
 

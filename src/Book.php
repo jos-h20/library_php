@@ -109,6 +109,22 @@
             $GLOBALS['DB']->exec("UPDATE books SET title = '{$new_title}' WHERE id = {$this->getId()};");
             $this->setTitle($new_title);
         }
+        function addCopy()
+        {
+            $GLOBALS['DB']->exec("INSERT INTO copies (book_id) VALUES ({$this->getId()});");
+        }
+
+        function getNumberOfCopies()
+        {
+            $query = $GLOBALS['DB']->query("SELECT * FROM copies WHERE book_id = {$this->getId()};");
+            $copies = $query->fetchAll(PDO::FETCH_ASSOC);
+            $count = 0;
+            foreach ($copies as $copy) {
+                $count++;
+            }  return $count;
+        }
+
+
     }
 
 

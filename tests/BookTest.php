@@ -24,167 +24,188 @@
             // Patron::deleteAll();
         }
 
-        function test_save()
+        // function test_save()
+        // {
+        //     //Arrange
+        //     $title = "Harry Potters Last Stand";
+        //     $id = null;
+        //     $test_book = new Book($title, $id);
+        //     $test_book->save();
+        //
+        //     //Act
+        //     $result = Book::getAll();
+        //
+        //     //Assert
+        //
+        //     $this->assertEquals($test_book, $result[0]);
+        //
+        // }
+        //
+        // function test_getAll()
+        // {
+        //     //Arrange
+        //     $title = "Harry Potters Last Stand";
+        //     $id = 1;
+        //     $test_book = new Book($title, $id);
+        //     $test_book->save();
+        //
+        //     $title2 = "Paolo";
+        //     $id2 = 2;
+        //     $test_book2 = new Book($title2, $id2);
+        //     $test_book2->save();
+        //
+        //     //Act
+        //     $result = Book::getAll();
+        //
+        //     //Assert
+        //     $this->assertEquals([$test_book, $test_book2], $result);
+        // }
+        //
+        // function test_deleteAll()
+        // {
+        //     //Arrange
+        //     $title = "Harry Potters Last Stand";
+        //     $test_book = new Book($title);
+        //     $test_book->save();
+        //
+        //     $title2 = "Paolo";
+        //     $test_book2 = new Book($title2);
+        //     $test_book2->save();
+        //
+        //
+        //     //Act
+        //     Book::deleteAll();
+        //     $result = Book::getAll();
+        //
+        //     //Assert
+        //     $this->assertEquals([], $result);
+        // }
+        //
+        // function test_findBook()
+        // {
+        //     //Arrange
+        //     $title = "Harry Potters Last Stand";
+        //     $test_book = new Book($title);
+        //     $test_book->save();
+        //
+        //     $title2 = "The Alchemists Revenge";
+        //     $test_book2 = new Book($title2);
+        //     $test_book2->save();
+        //     //Act
+        //     $result = Book::findBook($test_book->getId());
+        //     //Assert
+        //     $this->assertEquals($test_book, $result);
+        // }
+        //
+        // function test_findBookTitle()
+        // {
+        //     //Arrange
+        //     $title = "Harry Potters Last Stand";
+        //     $test_book = new Book($title);
+        //     $test_book->save();
+        //
+        //     $title2 = "The Alchemists Revenge";
+        //     $test_book2 = new Book($title2);
+        //     $test_book2->save();
+        //     //Act
+        //     $result = Book::findBookTitle($test_book->getTitle());
+        //     //Assert
+        //     $this->assertEquals($test_book, $result);
+        // }
+        //
+        // function test_getAuthors()
+        // {
+        //     //Arrange
+        //
+        //     $first_name = "J.K.";
+        //     $last_name = "Rowling";
+        //     $test_author = new Author($first_name, $last_name);
+        //     $test_author->save();
+        //
+        //     $first_name2 = "Paolo";
+        //     $last_name2 = "Coehlo";
+        //     $test_author2 = new Author($first_name2, $last_name2);
+        //     $test_author2->save();
+        //
+        //     $title = "Harry Potter and the Prisoner of Azkaban";
+        //     $test_book = new Book($title);
+        //     $test_book->save();
+        //
+        //     //Act
+        //     $test_book->addAuthor($test_author->getId());
+        //     $test_book->addAuthor($test_author2->getId());
+        //     $result = $test_book->getAuthors();
+        //
+        //     //Assert
+        //     $this->assertEquals([$test_author, $test_author2], $result);
+        // }
+        //
+        // function test_addAuthor()
+        // {
+        //     //Arrange
+        //     $first_name = "J.K.";
+        //     $last_name = "Rowling";
+        //     $test_author = new Author($first_name, $last_name);
+        //     $test_author->save();
+        //
+        //     $title = "Harry Potter and the Prisoner of Azkaban";
+        //     $test_book = new Book($title);
+        //     $test_book->save();
+        //
+        //     //Act
+        //     $test_book->addAuthor($test_author->getId());
+        //
+        //     //Assert
+        //     $this->assertEquals($test_book->getAuthors(), [$test_author]);
+        // }
+        // function testDelete() {
+        //     //Arrange;
+        //     $title = "Harry Potters Last Stand";
+        //     $test_book = new Book($title);
+        //     $test_book->save();
+        //
+        //     $title2 = "The Alchemists Revenge";
+        //     $test_book2 = new Book($title2);
+        //     $test_book2->save();
+        //     //Act;
+        //     $test_book2->delete();
+        //     //Assert;
+        //     $this->assertEquals([$test_book], Book::getAll());
+        // }
+        // function testUpdate()
+        // {
+        //     // Arrange
+        //     $title = "Harry Potters Last Stand";
+        //     $test_book = new Book($title);
+        //     $test_book->save();
+        //
+        //     $new_title = "Intro to Coding";
+        //     // Act
+        //     $test_book->update($new_title);
+        //     $result = [$test_book->getTitle()];
+        //     // Assert
+        //     $this->assertEquals(["Intro to Coding"], $result);
+        // }
+
+        function testGetNumberOfCopies()
         {
             //Arrange
-            $title = "Harry Potters Last Stand";
-            $id = null;
-            $test_book = new Book($title, $id);
-            $test_book->save();
+            $title = "Johns book";
+            $new_book = new Book($title);
+            $new_book->save();
 
             //Act
-            $result = Book::getAll();
+            $new_book->addCopy();
+            $new_book->addCopy();
+            $new_book->addCopy();
+            $new_book->addCopy();
+            $new_book->addCopy();
+            $new_book->addCopy();
+            $new_book->addCopy();
+            $result = $new_book->getNumberOfCopies();
 
             //Assert
-
-            $this->assertEquals($test_book, $result[0]);
-
-        }
-
-        function test_getAll()
-        {
-            //Arrange
-            $title = "Harry Potters Last Stand";
-            $id = 1;
-            $test_book = new Book($title, $id);
-            $test_book->save();
-
-            $title2 = "Paolo";
-            $id2 = 2;
-            $test_book2 = new Book($title2, $id2);
-            $test_book2->save();
-
-            //Act
-            $result = Book::getAll();
-
-            //Assert
-            $this->assertEquals([$test_book, $test_book2], $result);
-        }
-
-        function test_deleteAll()
-        {
-            //Arrange
-            $title = "Harry Potters Last Stand";
-            $test_book = new Book($title);
-            $test_book->save();
-
-            $title2 = "Paolo";
-            $test_book2 = new Book($title2);
-            $test_book2->save();
-
-
-            //Act
-            Book::deleteAll();
-            $result = Book::getAll();
-
-            //Assert
-            $this->assertEquals([], $result);
-        }
-
-        function test_findBook()
-        {
-            //Arrange
-            $title = "Harry Potters Last Stand";
-            $test_book = new Book($title);
-            $test_book->save();
-
-            $title2 = "The Alchemists Revenge";
-            $test_book2 = new Book($title2);
-            $test_book2->save();
-            //Act
-            $result = Book::findBook($test_book->getId());
-            //Assert
-            $this->assertEquals($test_book, $result);
-        }
-
-        function test_findBookTitle()
-        {
-            //Arrange
-            $title = "Harry Potters Last Stand";
-            $test_book = new Book($title);
-            $test_book->save();
-
-            $title2 = "The Alchemists Revenge";
-            $test_book2 = new Book($title2);
-            $test_book2->save();
-            //Act
-            $result = Book::findBookTitle($test_book->getTitle());
-            //Assert
-            $this->assertEquals($test_book, $result);
-        }
-
-        function test_getAuthors()
-        {
-            //Arrange
-
-            $first_name = "J.K.";
-            $last_name = "Rowling";
-            $test_author = new Author($first_name, $last_name);
-            $test_author->save();
-
-            $first_name2 = "Paolo";
-            $last_name2 = "Coehlo";
-            $test_author2 = new Author($first_name2, $last_name2);
-            $test_author2->save();
-
-            $title = "Harry Potter and the Prisoner of Azkaban";
-            $test_book = new Book($title);
-            $test_book->save();
-
-            //Act
-            $test_book->addAuthor($test_author->getId());
-            $test_book->addAuthor($test_author2->getId());
-            $result = $test_book->getAuthors();
-
-            //Assert
-            $this->assertEquals([$test_author, $test_author2], $result);
-        }
-
-        function test_addAuthor()
-        {
-            //Arrange
-            $first_name = "J.K.";
-            $last_name = "Rowling";
-            $test_author = new Author($first_name, $last_name);
-            $test_author->save();
-
-            $title = "Harry Potter and the Prisoner of Azkaban";
-            $test_book = new Book($title);
-            $test_book->save();
-
-            //Act
-            $test_book->addAuthor($test_author->getId());
-
-            //Assert
-            $this->assertEquals($test_book->getAuthors(), [$test_author]);
-        }
-        function testDelete() {
-            //Arrange;
-            $title = "Harry Potters Last Stand";
-            $test_book = new Book($title);
-            $test_book->save();
-
-            $title2 = "The Alchemists Revenge";
-            $test_book2 = new Book($title2);
-            $test_book2->save();
-            //Act;
-            $test_book2->delete();
-            //Assert;
-            $this->assertEquals([$test_book], Book::getAll());
-        }
-        function testUpdate()
-        {
-            // Arrange
-            $title = "Harry Potters Last Stand";
-            $test_book = new Book($title);
-            $test_book->save();
-
-            $new_title = "Intro to Coding";
-            // Act
-            $test_book->update($new_title);
-            $result = [$test_book->getTitle()];
-            // Assert
-            $this->assertEquals(["Intro to Coding"], $result);
+            $this->assertEquals(7, $result);
         }
     }
 ?>

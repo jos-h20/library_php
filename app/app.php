@@ -12,6 +12,8 @@
 
     $app = new Silex\Application();
 
+    // $app['debug'] = true;
+
     $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/../views'
     ));
@@ -45,7 +47,7 @@
     });
     $app->get("/book/{id}", function($id) use($app) {
         $book = Book::findBook($id);
-        return $app['twig']->render('book.html.twig', array('book' => $book, 'authors' => $book->getAuthors(), 'all_authors' => Author::getAll()));
+        return $app['twig']->render('book.html.twig', array('book' => $book, 'authors' => $book->getAuthors(), 'copies' => $book->getNumberOfCopies($id)));
     });
     // $app->post("/book_add_author", function() use ($app) {
     //     $author = Author::findAuthor($_POST['author_id']);
@@ -67,6 +69,17 @@
         return $app['twig']->render('books.html.twig', array('books' => Book::getAll()));
     });
 
+    $app->post("/books/add_copy/{id}", function($id) use ($app) {
+        $book = Book::findBook($id);
+        $copy = $_POST['copy'];
+        $new_copy = new Copy($book_id, $checked_out = 0, $due_date = null);
+        $new_copy->save();
+
+        $book->addCopy();
+
+        return $app['twig']->render('book.html.twig', array('book' => $book, 'authors' => $book->getAuthors(), 'copy' => $new_copy));
+    });
+
 
     $app->patch("/book/{id}/update", function($id) use ($app) {
         $book = Book::findBook($id);
@@ -74,6 +87,8 @@
         $book->update($new_title);
         return $app['twig']->render('book.html.twig', array('book' => $book, 'authors' => $book->getAuthors(), 'all_authors' => Author::getAll()));
     });
+
+
     $app->delete("/book/{id}/delete", function($id) use ($app) {
         $book = Book::findBook($id);
         $book->delete();

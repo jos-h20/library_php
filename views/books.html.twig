@@ -19,7 +19,7 @@
                     </ul>
                     {% else %}
                         <h3>This book has no authors</h3>
-                    {% endif %}    
+                    {% endif %}
                 {% endfor %}
             </ul>
         {% else %}
@@ -40,6 +40,7 @@
         <form action="/delete_all_books" method="post">
             <button type="submit">Delete ALL Books</button>
         </form>
+
 <!-- NAVIGATION -->
         {% include 'footer.html' %}
 
