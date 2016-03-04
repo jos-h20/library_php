@@ -71,13 +71,29 @@
 
     $app->post("/books/add_copy/{id}", function($id) use ($app) {
         $book = Book::findBook($id);
-        $copy = $_POST['copy'];
-        $new_copy = new Copy($book_id, $checked_out = 0, $due_date = null);
+        $book_id = $_POST['book_id'];
+        var_dump($book_id);
+        $new_copy = new Copy($book_id, 0, date('Y-m-d'));
         $new_copy->save();
+        // $new_copy->setId($GLOBALS['DB']->lastInsertId());
 
-        $book->addCopy();
 
         return $app['twig']->render('book.html.twig', array('book' => $book, 'authors' => $book->getAuthors(), 'copy' => $new_copy));
+    });
+
+    $app->delete("/copy/delete", function() use ($app) {
+        $book = Book::findBook($_POST['book_id']);
+        $copies = Copy::getAll();
+        $count = 0;
+        foreach ($copies as $copy)
+        {
+            if (($copy->getBookId() == $_POST['book_id']) && ($count == 0))
+            {
+                $copy->deleteCopy();
+                $count++;
+            }
+        }
+        return $app['twig']->render("book.html.twig", array('book' => $book, 'authors' => $book->getAuthors(), 'copies' => $book->getNumberOfCopies($_POST['book_id'])));
     });
 
 
@@ -94,6 +110,15 @@
         $book->delete();
         return $app['twig']->render("books.html.twig", array('books' => Book::getAll()));
     });
+
+    $app->get("/book/{id}/title", function($id) use($app) {
+        $title = $_GET['title'];
+        $found_book = Book::findBookTitle($title);
+        return $app['twig']->render('book.html.twig', array('book' => $found_book, 'authors' => $found_book->getAuthors(), 'copies' => $found_book->getNumberOfCopies($id)));
+    });
+
+
+
 ////// LIBRARIANS PATRONS PAGE///////
     // $app->post("/add_patron", function() use ($app) {
     //     $name = $_POST['name'];

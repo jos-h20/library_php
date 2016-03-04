@@ -65,8 +65,8 @@
             $found_book = null;
             $books = Book::getAll();
             foreach($books as $book) {
-                $book_title = $book->getTitle();
-                if ($book_title == $search_title) {
+                $book_id = $book->getId();
+                if ($book_id == $search_id) {
                   $found_book = $book;
                 }
             }
@@ -111,8 +111,10 @@
         }
         function addCopy()
         {
-            $GLOBALS['DB']->exec("INSERT INTO copies (book_id) VALUES ({$this->getId()});");
+            $GLOBALS['DB']->exec("INSERT INTO copies (book_id, checked_out) VALUES ({$this->getId()}, 0);");
         }
+
+
 
         function getNumberOfCopies()
         {
@@ -123,6 +125,8 @@
                 $count++;
             }  return $count;
         }
+
+
 
 
     }

@@ -41,6 +41,15 @@
             <button type="submit">Delete ALL Books</button>
         </form>
 
+        <form action="/book/{{book.getId}}" method="get">
+            
+            <label for="searched_title">Search for book by title:</label>
+            <input type="hidden" name="_method" value="{{ book.getId }}">
+            <input type="text" name="title">
+            <button type="submit">Search for Book</button>
+
+        </form>
+
 <!-- NAVIGATION -->
         {% include 'footer.html' %}
 

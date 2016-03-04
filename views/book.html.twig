@@ -6,7 +6,6 @@
     </head>
     <body>
         <h1> {{ book.getTitle}}</h1>
-        <h3> {{ book.getAuthors }}</h3>
         {% if authors is not empty %}
         <h4>Author:</h4>
             <ul>
@@ -48,9 +47,14 @@
             <button type="submit">Delete this book!</button>
         </form>
 <!-- ///ADD COPY -->
-        <form action="books/add_copy/{{book.getId}}" method="post">
-
-            <button type="submit" name="copy">Add Copy</button>
+        <form action="/books/add_copy/{{ book.getId }}" method="post">
+            <input type="hidden" name="book_id" value="{{ book.getId }}">
+            <button type="submit">Add Copy</button>
+        </form>
+        <form action="/copy/delete" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <input type="hidden" name="book_id" value="{{book.getId}}">
+            <button type="submit">Delete a copy!</button>
         </form>
 
 

@@ -44,6 +44,11 @@
             return $this->id;
         }
 
+        function setId($new_id)
+        {
+            $this->id = $new_id;
+        }
+
         function save()
         {
             $GLOBALS['DB']->exec(
@@ -76,7 +81,27 @@
         {
             $GLOBALS['DB']->exec("DELETE FROM copies");
         }
-    
+
+        static function findCopy($search_id)
+        {
+            $found_copy = null;
+            $copies = Copy::getAll();
+            foreach($copies as $copy) {
+                $copy_id = $copy->getId();
+                if ($copy_id == $search_id) {
+                  $found_copy = $copy;
+                }
+            }
+            return $found_copy;
+        }
+
+        function deleteCopy()
+        {
+            // $GLOBALS['DB']->exec("DELETE FROM copies WHERE id = {$this->getId()});");
+
+            $GLOBALS['DB']->exec("DELETE FROM copies WHERE id = {$this->getId()};");
+        }
+
 
 
 
